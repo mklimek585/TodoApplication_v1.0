@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="TodoApplication_v1._0.Calendar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TodoApplication_v1._0"
+        mc:Ignorable="d"
+        Height="600" Width="920"
+        Background="#272537">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#36334d" Grid.RowSpan="2" >
+        </Grid>
+
+        <TextBlock Text="ToDoApp v1.0"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="White"
+                   FontSize="44"
+                   FontFamily="Fonts/#Dosis" Height="56" Width="218"/>
+
+        <StackPanel Grid.Row="1" Margin="0,100,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                <Button Content="Add task" Foreground="White" FontSize="20" FontWeight="Medium" Click="Button_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                            <Setter Property="Background" Value="#FE6584" />
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF4C70"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="120" Height="40" CornerRadius="12" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Content="Remove task" Foreground="White" FontSize="20" FontWeight="Medium" Margin="10,0,0,0" Click="Button_Click_1">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                            <Setter Property="Background" Value="#FE6584" />
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF4C70"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="120" Height="40" CornerRadius="12" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <Viewbox Width="300" Height="300" >
+                    <Calendar Language="en-US" x:Name="calendar" SelectedDatesChanged="Calendar_SelectedDateChanged"/>
+                </Viewbox>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <StackPanel Margin="10,0,0,0" >
+                <TextBlock Text="Tasks list"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Foreground="White"
+                   FontSize="40"
+                   FontFamily="Fonts/#Dosis"/>
+            </StackPanel>
+
+            <StackPanel Margin="10,10,10,0">
+                <ListView Height="375" Width="540" Name="taskList" IsSynchronizedWithCurrentItem="True">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="50">
+                                <GridViewColumnHeader Content="Status" />
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Status, Mode=TwoWay}" Checked="CheckBox_Checked" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" Width="50" />
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="430" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>
